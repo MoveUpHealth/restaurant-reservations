@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reserve a Table</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Hot Restaurant</h1>
+      <h3>Reserve a Table</h3>
+      <hr>
+      <a href="/tables"><button class="btn btn-danger btn-lg"><span class="fa fa-plus"></span>View Tables</button></a>
+      <a href="/"><button class="btn btn-danger btn-lg"><span
+            class="fa fa-eye"></span>Home</button></a>
+    </div>
+    <div class="row">
+
+      <div class="col-12">
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3><strong>Table Reservation</strong></h3>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+                <label for="Name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="userName" placeholder="Please enter your full name">
+              </div>
+              <div class="mb-3">
+                <label for="Number" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone" placeholder="555-555-5555">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" placeholder="example@email.com">
+              </div>
+              <div class="mb-3">
+                <label for="tableID" class="form-label">Unique ID</label>
+                <input type="text" class="form-control" id="tableId" placeholder="Create a unique ID for your reservation">
+              </div>
+              <button type="submit" class="btn btn-primary btn-md" id="add-btn"><span
+                class="fa fa-search"></span> Submit</button>
+            
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    // Question: What does this code do?
+    $("#add-btn").on("click", function(event) {
+      event.preventDefault();
+      var newTable = {
+        table: $("#tableId").val().trim(),
+        id: $("#tableId").val().trim(),    
+        name: $("#userName").val().trim(),
+        email: $("#email").val().trim(),
+        phone: $("#phone").val().trim()
+        
+      };
+
+      // Question: What does this code do??
+      $.post("/api/tables", newTable)
+        .then(function(data) {
+          console.log("add.html", data);
+          alert("Adding reservation...");
+        });
+    });
+  </script>
+</body>
+
+</html>
